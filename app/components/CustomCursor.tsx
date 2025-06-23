@@ -1,72 +1,54 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 export function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
+  const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
-  const animationRef = useRef<number>()
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-      setIsVisible(true)
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768 || 'ontouchstart' in window
+      setIsMobile(mobile)
     }
-
-    const handleMouseLeave = () => {
-      setIsVisible(false)
-    }
-
-    window.addEventListener('mousemove', updateMousePosition)
-    document.addEventListener('mouseleave', handleMouseLeave)
-
-    return () => {
-      window.removeEventListener('mousemove', updateMousePosition)
-      document.removeEventListener('mouseleave', handleMouseLeave)
-    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   useEffect(() => {
-    const animateCursor = () => {
-      setCursorPosition(prev => {
-        const lerp = (start: number, end: number, factor: number) => {
-          return start + (end - start) * factor
-        }
+    if (isMobile) return
 
-        // Much slower interpolation factor (0.02 instead of typical 0.1-0.15)
-        const factor = 0.02
-        
-        return {
-          x: lerp(prev.x, mousePosition.x, factor),
-          y: lerp(prev.y, mousePosition.y, factor)
-        }
-      })
-
-      animationRef.current = requestAnimationFrame(animateCursor)
+    const updatePosition = (e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY })
     }
 
-    animationRef.current = requestAnimationFrame(animateCursor)
+    const handleMouseEnter = () => setIsVisible(true)
+    const handleMouseLeave = () => setIsVisible(false)
+
+    document.addEventListener('mousemove', updatePosition)
+    document.addEventListener('mouseenter', handleMouseEnter)
+    document.addEventListener('mouseleave', handleMouseLeave)
 
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
+      document.removeEventListener('mousemove', updatePosition)
+      document.removeEventListener('mouseenter', handleMouseEnter)
+      document.removeEventListener('mouseleave', handleMouseLeave)
     }
-  }, [mousePosition])
+  }, [isMobile])
+
+  if (isMobile || !isVisible) return null
 
   return (
     <div
-      className={`fixed pointer-events-none z-50 transition-opacity duration-300 ${
-        isVisible ? 'opacity-100' : 'opacity-0'
-      }`}
+      className="custom-cursor-glow"
       style={{
-        left: cursorPosition.x - 10,
-        top: cursorPosition.y - 10,
+        left: position.x,
+        top: position.y,
         transform: 'translate(-50%, -50%)',
       }}
-    >
-      <div className="custom-cursor-glow" />
-    </div>
+    />
   )
 } 

@@ -29,25 +29,54 @@ export function Video3D({ position, rotation, size = 200, animationDelay = 0 }: 
   return (
     <div className="cube-container absolute" style={containerStyle}>
       <div 
-        className="relative led-border-animation overflow-hidden shadow-2xl"
+        className="relative led-border-animation overflow-hidden shadow-2xl blob-hover-effect group cursor-pointer"
         style={{ 
           width: `${size}px`, 
           height: `${size}px`,
-          borderRadius: `${size * 0.15}px`, // More rounded corners
+          borderRadius: `${size * 0.15}px`,
           background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02))',
-          backdropFilter: 'blur(15px)',
+          backdropFilter: 'blur(8px)',
         }}
       >
+        {/* LED Iridescent Hover Effect - Behind video */}
+        <div 
+          className="absolute inset-0 z-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            borderRadius: `${size * 0.15}px`,
+            background: `
+              conic-gradient(from 0deg,
+                transparent 0deg,
+                rgba(255, 0, 128, 0.4) 30deg,
+                rgba(255, 215, 0, 0.6) 60deg,
+                rgba(0, 255, 128, 0.4) 90deg,
+                rgba(0, 128, 255, 0.5) 120deg,
+                rgba(128, 0, 255, 0.4) 150deg,
+                rgba(255, 107, 53, 0.5) 180deg,
+                rgba(255, 0, 128, 0.4) 210deg,
+                rgba(255, 215, 0, 0.6) 240deg,
+                rgba(0, 255, 128, 0.4) 270deg,
+                rgba(0, 128, 255, 0.5) 300deg,
+                rgba(128, 0, 255, 0.4) 330deg,
+                transparent 360deg
+              )
+            `,
+            animation: 'ledIridescence 3s linear infinite',
+            mixBlendMode: 'screen',
+            filter: 'blur(2px) brightness(1.3)',
+          }}
+        />
+
         <video
           ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover relative z-10"
+          preload="metadata"
+          className="w-full h-full object-cover relative z-10 pointer-events-none"
           style={{
             filter: 'brightness(1.1) contrast(1.1) saturate(1.2)',
-            borderRadius: `${size * 0.15}px`, // Match container border radius
+            borderRadius: `${size * 0.15}px`,
             willChange: 'transform',
           }}
         >
@@ -55,49 +84,49 @@ export function Video3D({ position, rotation, size = 200, animationDelay = 0 }: 
           Your browser does not support the video tag.
         </video>
         
-        {/* Optimized film grain overlay for the blob video */}
+        {/* Pulsing LED Ring - Over video */}
         <div 
-          className="absolute inset-0 pointer-events-none z-15"
+          className="absolute inset-[-4px] z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
           style={{
+            borderRadius: `${size * 0.15 + 4}px`,
             background: `
-              radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 1.2%),
-              radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.12) 0%, transparent 1%),
-              radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.17) 0%, transparent 1.4%),
-              radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.13) 0%, transparent 1.1%)
+              conic-gradient(from 90deg,
+                rgba(255, 215, 0, 0.8) 0deg,
+                rgba(255, 0, 128, 0.7) 60deg,
+                rgba(0, 255, 128, 0.8) 120deg,
+                rgba(0, 128, 255, 0.7) 180deg,
+                rgba(128, 0, 255, 0.8) 240deg,
+                rgba(255, 107, 53, 0.7) 300deg,
+                rgba(255, 215, 0, 0.8) 360deg
+              )
             `,
-            backgroundSize: '18px 18px, 22px 22px, 15px 15px, 25px 25px',
-            animation: 'grainShift 3s linear infinite',
-            mixBlendMode: 'overlay',
-            opacity: 0.35,
-            borderRadius: `${size * 0.15}px`,
-            willChange: 'transform',
+            animation: 'ledRingPulse 2s ease-in-out infinite',
+            filter: 'blur(2px)',
+            maskImage: `radial-gradient(ellipse at center, transparent 85%, black 95%)`,
+            WebkitMaskImage: `radial-gradient(ellipse at center, transparent 85%, black 95%)`,
           }}
         />
         
-        {/* Simplified fine grain layer */}
+        {/* Simplified film grain overlay */}
         <div 
-          className="absolute inset-0 pointer-events-none z-16"
+          className="absolute inset-0 z-15 pointer-events-none"
           style={{
-            background: `
-              radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 0.7%),
-              radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.11) 0%, transparent 0.8%)
-            `,
-            backgroundSize: '10px 10px, 12px 12px',
-            animation: 'grainShift 2s linear infinite reverse',
-            mixBlendMode: 'screen',
-            opacity: 0.25,
+            background: `radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 1%)`,
+            backgroundSize: '30px 30px',
+            animation: 'grainShift 6s linear infinite',
+            mixBlendMode: 'overlay',
+            opacity: 0.15,
             borderRadius: `${size * 0.15}px`,
-            willChange: 'transform',
           }}
         />
         
-        {/* Subtle overlay for depth */}
+        {/* Minimal overlay for depth */}
         <div 
-          className="absolute inset-0 pointer-events-none z-20"
+          className="absolute inset-0 z-20 pointer-events-none"
           style={{
-            background: 'linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(236, 72, 153, 0.05) 50%, rgba(59, 130, 246, 0.05) 100%)',
+            background: 'linear-gradient(135deg, rgba(255, 107, 53, 0.01) 0%, rgba(236, 72, 153, 0.01) 50%, rgba(59, 130, 246, 0.01) 100%)',
             mixBlendMode: 'overlay',
-            borderRadius: `${size * 0.15}px`, // Match container border radius
+            borderRadius: `${size * 0.15}px`,
           }}
         />
       </div>
