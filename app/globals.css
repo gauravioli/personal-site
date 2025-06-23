@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -119,27 +119,27 @@ a {
 
 /* Cube Gradient Styles */
 .gradient-orange {
-  background: linear-gradient(135deg, #ff6b35, #ff8e42, #ffa726);
+  background: linear-gradient(135deg, #ff6b35, #f7931e, #ffaa44);
 }
 
 .gradient-pink {
-  background: linear-gradient(135deg, #ff1744, #e91e63, #f06292);
+  background: linear-gradient(135deg, #ff6b9d, #c44569, #f8b500);
 }
 
 .gradient-purple {
-  background: linear-gradient(135deg, #9c27b0, #ab47bc, #ba68c8);
+  background: linear-gradient(135deg, #8a2be2, #6a0572, #ab47bc);
 }
 
 .gradient-blue {
-  background: linear-gradient(135deg, #2196f3, #42a5f5, #64b5f6);
+  background: linear-gradient(135deg, #3b82f6, #1e40af, #60a5fa);
 }
 
 .gradient-teal {
-  background: linear-gradient(135deg, #009688, #26a69a, #4db6ac);
+  background: linear-gradient(135deg, #0ea5e9, #0284c7, #38bdf8);
 }
 
 .gradient-green {
-  background: linear-gradient(135deg, #4caf50, #66bb6a, #81c784);
+  background: linear-gradient(135deg, #22c55e, #16a34a, #4ade80);
 }
 
 .gradient-mesh {
@@ -522,4 +522,330 @@ a {
     transform: translate(-1px, -2px) rotate(270deg);
     opacity: 0.45;
   }
+}
+
+/* Custom perspective */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Custom cursor styles */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease;
+}
+
+/* Film grain animation - background video */
+.film-grain-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    radial-gradient(circle at 75% 25%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 25% 75%, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 4px 4px, 6px 6px, 8px 8px, 5px 5px, 7px 7px;
+  animation: filmGrain 0.8s steps(8, end) infinite;
+  mix-blend-mode: overlay;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.film-grain-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px, 9px 9px;
+  animation: filmGrain 1.2s steps(6, end) infinite reverse;
+  mix-blend-mode: screen;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 11;
+}
+
+/* Film grain animation - blob video */
+.film-grain-blob::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background-image: 
+    radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px, 4px 4px;
+  animation: filmGrain 0.6s steps(10, end) infinite;
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.film-grain-blob::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background-image: 
+    radial-gradient(circle at 60% 40%, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 6px 6px, 4px 4px;
+  animation: filmGrain 1s steps(8, end) infinite reverse;
+  mix-blend-mode: screen;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* Navigation hover effects */
+.nav-item-custom {
+  position: relative;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.9), rgba(255, 215, 0, 0.8), rgba(255, 107, 142, 0.7));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item-custom::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.8), rgba(255, 107, 142, 0.6), transparent);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+.nav-item-custom:hover {
+  transform: translateY(-1px);
+  text-shadow: 
+    0 0 20px rgba(255, 215, 0, 0.4),
+    0 0 40px rgba(255, 107, 142, 0.3),
+    0 0 60px rgba(138, 43, 226, 0.2);
+  background: linear-gradient(45deg, rgba(255, 255, 255, 1), rgba(255, 215, 0, 0.9), rgba(255, 107, 142, 0.8), rgba(138, 43, 226, 0.7));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-item-custom:hover::before {
+  width: 120%;
+}
+
+/* LED Snake Animation around blob */
+.led-snake {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, rgba(255, 215, 0, 0.4) 70%, transparent 100%);
+  box-shadow: 
+    0 0 15px rgba(255, 215, 0, 0.8),
+    0 0 30px rgba(255, 215, 0, 0.4),
+    0 0 45px rgba(255, 215, 0, 0.2);
+  animation: ledSnakeTravel 4s linear infinite;
+  z-index: 20;
+}
+
+/* Keyframes for LED snake traveling around blob perimeter */
+@keyframes ledSnakeTravel {
+  0% { 
+    top: 50%; 
+    left: calc(50% + 180px); 
+    background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, rgba(255, 215, 0, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.4), 0 0 45px rgba(255, 215, 0, 0.2);
+  }
+  6.25% { 
+    top: calc(50% - 127px); 
+    left: calc(50% + 127px); 
+    background: radial-gradient(circle, rgba(255, 107, 142, 1) 0%, rgba(255, 107, 142, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(255, 107, 142, 0.8), 0 0 30px rgba(255, 107, 142, 0.4), 0 0 45px rgba(255, 107, 142, 0.2);
+  }
+  12.5% { 
+    top: calc(50% - 180px); 
+    left: 50%; 
+    background: radial-gradient(circle, rgba(138, 43, 226, 1) 0%, rgba(138, 43, 226, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.8), 0 0 30px rgba(138, 43, 226, 0.4), 0 0 45px rgba(138, 43, 226, 0.2);
+  }
+  18.75% { 
+    top: calc(50% - 127px); 
+    left: calc(50% - 127px); 
+    background: radial-gradient(circle, rgba(59, 130, 246, 1) 0%, rgba(59, 130, 246, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.4), 0 0 45px rgba(59, 130, 246, 0.2);
+  }
+  25% { 
+    top: 50%; 
+    left: calc(50% - 180px); 
+    background: radial-gradient(circle, rgba(14, 165, 233, 1) 0%, rgba(14, 165, 233, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.8), 0 0 30px rgba(14, 165, 233, 0.4), 0 0 45px rgba(14, 165, 233, 0.2);
+  }
+  31.25% { 
+    top: calc(50% + 127px); 
+    left: calc(50% - 127px); 
+    background: radial-gradient(circle, rgba(34, 197, 94, 1) 0%, rgba(34, 197, 94, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.8), 0 0 30px rgba(34, 197, 94, 0.4), 0 0 45px rgba(34, 197, 94, 0.2);
+  }
+  37.5% { 
+    top: calc(50% + 180px); 
+    left: 50%; 
+    background: radial-gradient(circle, rgba(34, 197, 94, 1) 0%, rgba(34, 197, 94, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.8), 0 0 30px rgba(34, 197, 94, 0.4), 0 0 45px rgba(34, 197, 94, 0.2);
+  }
+  43.75% { 
+    top: calc(50% + 127px); 
+    left: calc(50% + 127px); 
+    background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, rgba(255, 215, 0, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.4), 0 0 45px rgba(255, 215, 0, 0.2);
+  }
+  50% { 
+    top: 50%; 
+    left: calc(50% + 180px); 
+    background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, rgba(255, 215, 0, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.4), 0 0 45px rgba(255, 215, 0, 0.2);
+  }
+  56.25% { 
+    top: calc(50% - 127px); 
+    left: calc(50% + 127px); 
+    background: radial-gradient(circle, rgba(255, 107, 142, 1) 0%, rgba(255, 107, 142, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(255, 107, 142, 0.8), 0 0 30px rgba(255, 107, 142, 0.4), 0 0 45px rgba(255, 107, 142, 0.2);
+  }
+  62.5% { 
+    top: calc(50% - 180px); 
+    left: 50%; 
+    background: radial-gradient(circle, rgba(138, 43, 226, 1) 0%, rgba(138, 43, 226, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.8), 0 0 30px rgba(138, 43, 226, 0.4), 0 0 45px rgba(138, 43, 226, 0.2);
+  }
+  68.75% { 
+    top: calc(50% - 127px); 
+    left: calc(50% - 127px); 
+    background: radial-gradient(circle, rgba(59, 130, 246, 1) 0%, rgba(59, 130, 246, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.4), 0 0 45px rgba(59, 130, 246, 0.2);
+  }
+  75% { 
+    top: 50%; 
+    left: calc(50% - 180px); 
+    background: radial-gradient(circle, rgba(14, 165, 233, 1) 0%, rgba(14, 165, 233, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.8), 0 0 30px rgba(14, 165, 233, 0.4), 0 0 45px rgba(14, 165, 233, 0.2);
+  }
+  81.25% { 
+    top: calc(50% + 127px); 
+    left: calc(50% - 127px); 
+    background: radial-gradient(circle, rgba(34, 197, 94, 1) 0%, rgba(34, 197, 94, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.8), 0 0 30px rgba(34, 197, 94, 0.4), 0 0 45px rgba(34, 197, 94, 0.2);
+  }
+  87.5% { 
+    top: calc(50% + 180px); 
+    left: 50%; 
+    background: radial-gradient(circle, rgba(34, 197, 94, 1) 0%, rgba(34, 197, 94, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.8), 0 0 30px rgba(34, 197, 94, 0.4), 0 0 45px rgba(34, 197, 94, 0.2);
+  }
+  93.75% { 
+    top: calc(50% + 127px); 
+    left: calc(50% + 127px); 
+    background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, rgba(255, 215, 0, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.4), 0 0 45px rgba(255, 215, 0, 0.2);
+  }
+  100% { 
+    top: 50%; 
+    left: calc(50% + 180px); 
+    background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, rgba(255, 215, 0, 0.4) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.4), 0 0 45px rgba(255, 215, 0, 0.2);
+  }
+}
+
+/* Psychedelic animations for blob zoom */
+@keyframes psychedelicLights {
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+    filter: hue-rotate(90deg) brightness(1.2);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+    filter: hue-rotate(180deg) brightness(1.1);
+  }
+  75% {
+    transform: rotate(270deg) scale(1.1);
+    filter: hue-rotate(270deg) brightness(1.3);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    filter: hue-rotate(360deg) brightness(1);
+  }
+}
+
+@keyframes rotateColorRing {
+  0% {
+    transform: rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    filter: hue-rotate(180deg);
+  }
+}
+
+@keyframes psychedelicPulse {
+  0% {
+    transform: scale(0.8);
+    filter: hue-rotate(0deg) saturate(1.5);
+  }
+  50% {
+    transform: scale(1.4);
+    filter: hue-rotate(180deg) saturate(2);
+  }
+  100% {
+    transform: scale(1.8);
+    filter: hue-rotate(360deg) saturate(1.2);
+  }
+}
+
+/* Film grain animation */
+@keyframes filmGrain {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-1px, -1px) rotate(1deg); }
+  20% { transform: translate(1px, -1px) rotate(-1deg); }
+  30% { transform: translate(-1px, 1px) rotate(0.5deg); }
+  40% { transform: translate(1px, 1px) rotate(-0.5deg); }
+  50% { transform: translate(-0.5px, -0.5px) rotate(1deg); }
+  60% { transform: translate(0.5px, -0.5px) rotate(-1deg); }
+  70% { transform: translate(-0.5px, 0.5px) rotate(0deg); }
+  80% { transform: translate(0.5px, 0.5px) rotate(0.5deg); }
+  90% { transform: translate(0px, 0px) rotate(-0.5deg); }
 }
