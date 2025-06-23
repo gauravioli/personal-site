@@ -51,13 +51,6 @@ body {
   cursor: none; /* Hide default cursor */
 }
 
-/* Mobile-specific cursor handling */
-@media (max-width: 768px) {
-  body {
-    cursor: auto; /* Show default cursor on mobile */
-  }
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -238,35 +231,40 @@ a {
 
 /* Enhanced Custom Cursor with More Pulsing */
 .custom-cursor-glow {
-  width: 24px;
-  height: 24px;
+  position: fixed;
+  width: 28px;
+  height: 28px;
   background: radial-gradient(circle, 
     rgba(255, 255, 255, 1) 0%, 
-    rgba(255, 215, 0, 0.8) 30%, 
-    rgba(255, 0, 128, 0.6) 60%,
-    transparent 90%
+    rgba(255, 215, 0, 0.9) 25%, 
+    rgba(255, 0, 128, 0.7) 50%,
+    rgba(138, 43, 226, 0.5) 75%,
+    transparent 100%
   );
   border-radius: 50%;
-  filter: blur(2px);
+  filter: blur(1px) brightness(1.8);
   box-shadow: 
-    0 0 30px rgba(255, 215, 0, 0.8),
-    0 0 60px rgba(255, 0, 128, 0.6),
-    0 0 90px rgba(128, 0, 255, 0.4);
-  animation: cursorPulse 1.5s ease-in-out infinite;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    0 0 25px rgba(255, 215, 0, 0.9),
+    0 0 50px rgba(255, 0, 128, 0.7),
+    0 0 75px rgba(138, 43, 226, 0.5);
+  animation: cursorPulse 1.3s ease-in-out infinite;
+  transition: transform 0.05s ease-out;
   will-change: transform;
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: screen;
 }
 
 @keyframes cursorPulse {
   0%, 100% { 
-    transform: scale(0.8);
-    opacity: 0.6;
-    filter: blur(2px) brightness(1);
+    transform: scale(0.9);
+    opacity: 0.7;
+    filter: blur(1px) brightness(1.5);
   }
   50% { 
-    transform: scale(1.4);
+    transform: scale(1.3);
     opacity: 1;
-    filter: blur(1px) brightness(1.5);
+    filter: blur(0.5px) brightness(2);
   }
 }
 
@@ -458,15 +456,15 @@ a {
   }
 }
 
-/* Optimized Grain Animation */
+/* Simplified Grain Animation */
 @keyframes grainShift {
   0%, 100% { 
-    transform: translate3d(0, 0, 0);
-    opacity: 0.25;
+    transform: translate(0, 0);
+    opacity: 0.3;
   }
   50% { 
-    transform: translate3d(2px, -2px, 0);
-    opacity: 0.35;
+    transform: translate(1px, -1px);
+    opacity: 0.4;
   }
 }
 
@@ -589,10 +587,6 @@ a {
     0 8px 32px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     inset 0 -1px 0 rgba(255, 255, 255, 0.05);
-  
-  /* Mobile optimizations */
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-item-custom::before {
@@ -784,15 +778,15 @@ a {
 
 @keyframes psychedelicPulse {
   0% {
-    transform: scale3d(0.95, 0.95, 1);
+    transform: scale(0.9);
     filter: hue-rotate(0deg);
   }
   50% {
-    transform: scale3d(1.1, 1.1, 1);
+    transform: scale(1.2);
     filter: hue-rotate(180deg);
   }
   100% {
-    transform: scale3d(1.05, 1.05, 1);
+    transform: scale(1.1);
     filter: hue-rotate(360deg);
   }
 }
@@ -803,53 +797,58 @@ a {
   50% { transform: translate(1px, 1px); }
 }
 
-/* Optimized LED Iridescent Effects */
+/* LED Iridescent Effects */
 @keyframes ledIridescence {
   0% {
     transform: rotate(0deg) scale(1);
-    filter: blur(2px) brightness(1.3) hue-rotate(0deg);
+    filter: blur(2px) brightness(1.5) hue-rotate(0deg);
   }
-  50% {
-    transform: rotate(180deg) scale(1.02);
-    filter: blur(1.5px) brightness(1.5) hue-rotate(180deg);
+  33% {
+    transform: rotate(120deg) scale(1.05);
+    filter: blur(1px) brightness(1.8) hue-rotate(120deg);
+  }
+  66% {
+    transform: rotate(240deg) scale(0.95);
+    filter: blur(3px) brightness(1.3) hue-rotate(240deg);
   }
   100% {
     transform: rotate(360deg) scale(1);
-    filter: blur(2px) brightness(1.3) hue-rotate(360deg);
+    filter: blur(2px) brightness(1.5) hue-rotate(360deg);
   }
 }
 
 @keyframes ledRingPulse {
   0%, 100% {
     transform: scale(1) rotate(0deg);
-    opacity: 0.7;
-    filter: blur(2px) brightness(1.3);
+    opacity: 0.6;
+    filter: blur(3px) brightness(1.2);
   }
   50% {
-    transform: scale(1.05) rotate(180deg);
+    transform: scale(1.1) rotate(180deg);
     opacity: 0.9;
-    filter: blur(1px) brightness(1.6);
+    filter: blur(1px) brightness(1.8);
   }
 }
 
-/* Optimized Blob Hover Effect Container */
+/* Blob Hover Effect Container */
 .blob-hover-effect {
-  cursor: pointer;
-  transition: transform 0.3s ease-out, filter 0.3s ease-out;
-  will-change: transform, filter;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+  cursor: none;
+  transition: all 0.4s ease-out;
 }
 
 .blob-hover-effect:hover {
-  transform: scale(1.01);
-  filter: brightness(1.05) saturate(1.15);
+  transform: scale(1.02);
+  filter: brightness(1.1) saturate(1.3);
 }
 
-/* Mobile touch interactions */
-@media (max-width: 768px) {
-  .blob-hover-effect:active {
-    transform: scale(1.01);
-    filter: brightness(1.05) saturate(1.15);
+/* Sparkle Animation */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
   }
 }

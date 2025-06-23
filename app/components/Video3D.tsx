@@ -27,9 +27,15 @@ export function Video3D({ position, rotation, size = 200, animationDelay = 0 }: 
   }
 
   return (
-    <div className="cube-container absolute" style={containerStyle}>
+    <div 
+      className="cube-container absolute group cursor-none"
+      style={{
+        ...containerStyle,
+        zIndex: 20,
+      }}
+    >
       <div 
-        className="relative led-border-animation overflow-hidden shadow-2xl blob-hover-effect group cursor-pointer"
+        className="relative led-border-animation overflow-hidden shadow-2xl blob-hover-effect"
         style={{ 
           width: `${size}px`, 
           height: `${size}px`,
@@ -38,34 +44,6 @@ export function Video3D({ position, rotation, size = 200, animationDelay = 0 }: 
           backdropFilter: 'blur(8px)',
         }}
       >
-        {/* LED Iridescent Hover Effect - Behind video */}
-        <div 
-          className="absolute inset-0 z-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{
-            borderRadius: `${size * 0.15}px`,
-            background: `
-              conic-gradient(from 0deg,
-                transparent 0deg,
-                rgba(255, 0, 128, 0.4) 30deg,
-                rgba(255, 215, 0, 0.6) 60deg,
-                rgba(0, 255, 128, 0.4) 90deg,
-                rgba(0, 128, 255, 0.5) 120deg,
-                rgba(128, 0, 255, 0.4) 150deg,
-                rgba(255, 107, 53, 0.5) 180deg,
-                rgba(255, 0, 128, 0.4) 210deg,
-                rgba(255, 215, 0, 0.6) 240deg,
-                rgba(0, 255, 128, 0.4) 270deg,
-                rgba(0, 128, 255, 0.5) 300deg,
-                rgba(128, 0, 255, 0.4) 330deg,
-                transparent 360deg
-              )
-            `,
-            animation: 'ledIridescence 3s linear infinite',
-            mixBlendMode: 'screen',
-            filter: 'blur(2px) brightness(1.3)',
-          }}
-        />
-
         <video
           ref={videoRef}
           autoPlay
@@ -84,47 +62,95 @@ export function Video3D({ position, rotation, size = 200, animationDelay = 0 }: 
           Your browser does not support the video tag.
         </video>
         
-        {/* Pulsing LED Ring - Over video */}
+        {/* Minimal film grain overlay for performance */}
         <div 
-          className="absolute inset-[-4px] z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+          className="absolute inset-0 pointer-events-none z-15"
           style={{
-            borderRadius: `${size * 0.15 + 4}px`,
             background: `
-              conic-gradient(from 90deg,
-                rgba(255, 215, 0, 0.8) 0deg,
-                rgba(255, 0, 128, 0.7) 60deg,
-                rgba(0, 255, 128, 0.8) 120deg,
-                rgba(0, 128, 255, 0.7) 180deg,
-                rgba(128, 0, 255, 0.8) 240deg,
-                rgba(255, 107, 53, 0.7) 300deg,
-                rgba(255, 215, 0, 0.8) 360deg
-              )
+              radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 1%)
             `,
-            animation: 'ledRingPulse 2s ease-in-out infinite',
-            filter: 'blur(2px)',
-            maskImage: `radial-gradient(ellipse at center, transparent 85%, black 95%)`,
-            WebkitMaskImage: `radial-gradient(ellipse at center, transparent 85%, black 95%)`,
-          }}
-        />
-        
-        {/* Simplified film grain overlay */}
-        <div 
-          className="absolute inset-0 z-15 pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 1%)`,
-            backgroundSize: '30px 30px',
+            backgroundSize: '25px 25px',
             animation: 'grainShift 6s linear infinite',
             mixBlendMode: 'overlay',
             opacity: 0.15,
             borderRadius: `${size * 0.15}px`,
+            willChange: 'transform',
+          }}
+        />
+        
+        {/* LED Iridescent Hover Effect */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-25 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out"
+          style={{
+            borderRadius: `${size * 0.15}px`,
+            background: `
+              conic-gradient(from 0deg,
+                transparent 0deg,
+                rgba(255, 0, 128, 0.8) 30deg,
+                rgba(255, 215, 0, 1.0) 60deg,
+                rgba(0, 255, 128, 0.8) 90deg,
+                rgba(0, 128, 255, 0.9) 120deg,
+                rgba(128, 0, 255, 0.8) 150deg,
+                rgba(255, 107, 53, 0.9) 180deg,
+                rgba(255, 0, 128, 0.8) 210deg,
+                rgba(255, 215, 0, 1.0) 240deg,
+                rgba(0, 255, 128, 0.8) 270deg,
+                rgba(0, 128, 255, 0.9) 300deg,
+                rgba(128, 0, 255, 0.8) 330deg,
+                transparent 360deg
+              )
+            `,
+            animation: 'ledIridescence 2.5s linear infinite',
+            mixBlendMode: 'screen',
+            filter: 'blur(1px) brightness(1.8)',
+          }}
+        />
+        
+        {/* Pulsing LED Ring */}
+        <div 
+          className="absolute inset-[-6px] pointer-events-none z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"
+          style={{
+            borderRadius: `${size * 0.15 + 6}px`,
+            background: `
+              conic-gradient(from 90deg,
+                rgba(255, 215, 0, 1.0) 0deg,
+                rgba(255, 0, 128, 0.9) 60deg,
+                rgba(0, 255, 128, 1.0) 120deg,
+                rgba(0, 128, 255, 0.9) 180deg,
+                rgba(128, 0, 255, 1.0) 240deg,
+                rgba(255, 107, 53, 0.9) 300deg,
+                rgba(255, 215, 0, 1.0) 360deg
+              )
+            `,
+            animation: 'ledRingPulse 1.8s ease-in-out infinite',
+            filter: 'blur(2px)',
+            maskImage: `radial-gradient(ellipse at center, transparent 82%, black 90%)`,
+            WebkitMaskImage: `radial-gradient(ellipse at center, transparent 82%, black 90%)`,
+          }}
+        />
+        
+        {/* Sparkle Effect */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-35 opacity-0 group-hover:opacity-100 transition-opacity duration-800"
+          style={{
+            borderRadius: `${size * 0.15}px`,
+            background: `
+              radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.8) 0%, transparent 3%),
+              radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.6) 0%, transparent 2%),
+              radial-gradient(circle at 60% 20%, rgba(255, 255, 255, 0.7) 0%, transparent 2.5%),
+              radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.5) 0%, transparent 2%)
+            `,
+            backgroundSize: '40px 40px, 30px 30px, 35px 35px, 25px 25px',
+            animation: 'sparkle 3s ease-in-out infinite',
+            mixBlendMode: 'screen',
           }}
         />
         
         {/* Minimal overlay for depth */}
         <div 
-          className="absolute inset-0 z-20 pointer-events-none"
+          className="absolute inset-0 pointer-events-none z-20"
           style={{
-            background: 'linear-gradient(135deg, rgba(255, 107, 53, 0.01) 0%, rgba(236, 72, 153, 0.01) 50%, rgba(59, 130, 246, 0.01) 100%)',
+            background: 'linear-gradient(135deg, rgba(255, 107, 53, 0.02) 0%, rgba(236, 72, 153, 0.02) 50%, rgba(59, 130, 246, 0.02) 100%)',
             mixBlendMode: 'overlay',
             borderRadius: `${size * 0.15}px`,
           }}

@@ -5,7 +5,6 @@ import { CubeScene } from './components/CubeScene'
 import { VideoBackground } from './components/VideoBackground'
 import { CustomCursor } from './components/CustomCursor'
 import { TypewriterText } from './components/TypewriterText'
-import { Navigation } from './components/Navigation'
 
 // Loading component for better UX
 function LoadingFallback() {
@@ -19,9 +18,6 @@ function LoadingFallback() {
 export default function Home() {
   return (
     <main className="min-h-[400vh] relative overflow-x-hidden"> {/* 4x taller for scrolling */}
-      {/* Navigation */}
-      <Navigation />
-      
       {/* Custom Cursor */}
       <Suspense fallback={null}>
         <CustomCursor />
