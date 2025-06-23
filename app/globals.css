@@ -235,6 +235,7 @@ a {
     0 0 20px rgba(255, 255, 255, 0.6),
     0 0 40px rgba(255, 255, 255, 0.3);
   animation: cursorPulse 2s ease-in-out infinite;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @keyframes cursorPulse {
@@ -246,6 +247,60 @@ a {
     transform: scale(1.2);
     opacity: 1;
   }
+}
+
+/* Custom Navigation Item Hover Effect */
+.nav-item-custom {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.nav-item-custom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 215, 0, 0.3) 25%,
+    rgba(255, 0, 128, 0.4) 50%,
+    rgba(128, 0, 255, 0.3) 75%,
+    transparent 100%
+  );
+  transition: left 0.6s ease-in-out;
+  z-index: -1;
+}
+
+.nav-item-custom:hover::before {
+  left: 100%;
+}
+
+.nav-item-custom:hover {
+  color: #ffffff;
+  text-shadow: 
+    0 0 10px rgba(255, 215, 0, 0.8),
+    0 0 20px rgba(255, 0, 128, 0.6),
+    0 0 30px rgba(128, 0, 255, 0.4);
+  transform: scale(1.1);
+}
+
+.nav-item-custom::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff6b35, #e91e63, #9c27b0);
+  transition: width 0.4s ease-out;
+}
+
+.nav-item-custom:hover::after {
+  width: 100%;
 }
 
 /* Glassmorphic Border Animation */

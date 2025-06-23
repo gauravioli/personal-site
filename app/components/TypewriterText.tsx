@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 export function TypewriterText() {
   const [scrollProgress, setScrollProgress] = useState(0)
   const [showWebsite, setShowWebsite] = useState(false)
-  const text = "hello, welcome to gaurav's website"
+  const text = "hello, welcome to gaurav's website,,,"
   
   useEffect(() => {
     const handleScroll = () => {
@@ -46,10 +46,10 @@ export function TypewriterText() {
           }}
         >
           <div className="flex space-x-12 text-white font-bold text-lg tracking-wide">
-            <span className="transition-all duration-300 hover:text-cyan-400">[home]</span>
-            <span className="transition-all duration-300 hover:text-cyan-400">[works]</span>
-            <span className="transition-all duration-300 hover:text-cyan-400">[about]</span>
-            <span className="transition-all duration-300 hover:text-cyan-400">[contact]</span>
+            <span className="nav-item-custom transition-all duration-500 hover:scale-110">[home]</span>
+            <span className="nav-item-custom transition-all duration-500 hover:scale-110">[works]</span>
+            <span className="nav-item-custom transition-all duration-500 hover:scale-110">[about]</span>
+            <span className="nav-item-custom transition-all duration-500 hover:scale-110">[contact]</span>
           </div>
         </nav>
 
@@ -69,9 +69,9 @@ export function TypewriterText() {
               }`}
               style={{
                 textShadow: `
-                  0 0 25px rgba(0, 0, 0, 0.8),
-                  0 0 50px rgba(0, 0, 0, 0.6),
-                  2px 2px 8px rgba(0, 0, 0, 0.9)
+                  0 0 25px rgba(0, 0, 0, 0.3),
+                  0 0 50px rgba(0, 0, 0, 0.2),
+                  2px 2px 8px rgba(0, 0, 0, 0.4)
                 `,
                 letterSpacing: '-0.05em'
               }}
@@ -86,9 +86,9 @@ export function TypewriterText() {
               }`}
               style={{
                 textShadow: `
-                  0 0 25px rgba(0, 0, 0, 0.8),
-                  0 0 50px rgba(0, 0, 0, 0.6),
-                  2px 2px 8px rgba(0, 0, 0, 0.9)
+                  0 0 25px rgba(0, 0, 0, 0.3),
+                  0 0 50px rgba(0, 0, 0, 0.2),
+                  2px 2px 8px rgba(0, 0, 0, 0.4)
                 `,
                 letterSpacing: '-0.05em'
               }}
@@ -109,13 +109,14 @@ export function TypewriterText() {
     >
       <div className="text-center">
         <p 
-          className="text-2xl md:text-3xl font-light tracking-tight text-white"
+          className="text-2xl md:text-3xl font-light text-white"
           style={{
             textShadow: `
-              0 0 25px rgba(0, 0, 0, 0.8),
-              0 0 50px rgba(0, 0, 0, 0.6),
-              2px 2px 8px rgba(0, 0, 0, 0.9)
-            `
+              0 0 25px rgba(0, 0, 0, 0.25),
+              0 0 50px rgba(0, 0, 0, 0.15),
+              2px 2px 8px rgba(0, 0, 0, 0.3)
+            `,
+            letterSpacing: '-0.08em'
           }}
         >
           {displayText}
@@ -125,9 +126,9 @@ export function TypewriterText() {
             }`}
             style={{
               boxShadow: `
-                0 0 15px rgba(0, 0, 0, 0.8),
-                0 0 30px rgba(0, 0, 0, 0.6),
-                2px 2px 6px rgba(0, 0, 0, 0.9)
+                0 0 15px rgba(0, 0, 0, 0.25),
+                0 0 30px rgba(0, 0, 0, 0.15),
+                2px 2px 6px rgba(0, 0, 0, 0.3)
               `
             }}
           />
