@@ -64,14 +64,16 @@ export function TypewriterText() {
         >
           <div className="text-left">
             <h2 
-              className={`text-2xl font-bold tracking-tight transition-all duration-800 ${
-                showWebsite ? 'delay-200 opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              className={`text-2xl font-light tracking-tighter transform scale-y-125 transition-all duration-1200 ease-out ${
+                showWebsite ? 'delay-700 opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
               }`}
               style={{
                 textShadow: `
-                  0 0 8px rgba(0, 0, 0, 0.6),
-                  1px 1px 2px rgba(0, 0, 0, 0.7)
-                `
+                  0 0 25px rgba(0, 0, 0, 0.8),
+                  0 0 50px rgba(0, 0, 0, 0.6),
+                  2px 2px 8px rgba(0, 0, 0, 0.9)
+                `,
+                letterSpacing: '-0.05em'
               }}
             >
               [a collection of my works]
@@ -79,14 +81,16 @@ export function TypewriterText() {
           </div>
           <div className="text-right">
             <h2 
-              className={`text-2xl font-bold tracking-tight transition-all duration-800 ${
-                showWebsite ? 'delay-400 opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              className={`text-2xl font-light tracking-tighter transform scale-y-125 transition-all duration-1200 ease-out ${
+                showWebsite ? 'delay-1000 opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
               }`}
               style={{
                 textShadow: `
-                  0 0 8px rgba(0, 0, 0, 0.6),
-                  1px 1px 2px rgba(0, 0, 0, 0.7)
-                `
+                  0 0 25px rgba(0, 0, 0, 0.8),
+                  0 0 50px rgba(0, 0, 0, 0.6),
+                  2px 2px 8px rgba(0, 0, 0, 0.9)
+                `,
+                letterSpacing: '-0.05em'
               }}
             >
               [gaurav thapa 2025]
@@ -108,8 +112,9 @@ export function TypewriterText() {
           className="text-2xl md:text-3xl font-light tracking-tight text-white"
           style={{
             textShadow: `
-              0 0 8px rgba(0, 0, 0, 0.6),
-              1px 1px 2px rgba(0, 0, 0, 0.7)
+              0 0 25px rgba(0, 0, 0, 0.8),
+              0 0 50px rgba(0, 0, 0, 0.6),
+              2px 2px 8px rgba(0, 0, 0, 0.9)
             `
           }}
         >
@@ -120,8 +125,9 @@ export function TypewriterText() {
             }`}
             style={{
               boxShadow: `
-                0 0 4px rgba(0, 0, 0, 0.6),
-                1px 1px 2px rgba(0, 0, 0, 0.7)
+                0 0 15px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(0, 0, 0, 0.6),
+                2px 2px 6px rgba(0, 0, 0, 0.9)
               `
             }}
           />
