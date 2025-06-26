@@ -78,9 +78,9 @@ export function Video3D({ position, rotation, size = 200, animationDelay = 0 }: 
           }}
         />
         
-        {/* LED Iridescent Hover Effect */}
+        {/* LED Iridescent Hover Effect - Reduced on mobile */}
         <div 
-          className="absolute inset-0 pointer-events-none z-25 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out"
+          className="absolute inset-0 pointer-events-none z-25 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out md:block hidden"
           style={{
             borderRadius: `${size * 0.15}px`,
             background: `
@@ -106,9 +106,31 @@ export function Video3D({ position, rotation, size = 200, animationDelay = 0 }: 
           }}
         />
         
-        {/* Pulsing LED Ring */}
+        {/* Simplified mobile LED effect */}
         <div 
-          className="absolute inset-[-6px] pointer-events-none z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"
+          className="absolute inset-0 pointer-events-none z-25 opacity-0 group-hover:opacity-60 transition-all duration-700 ease-out md:hidden block"
+          style={{
+            borderRadius: `${size * 0.15}px`,
+            background: `
+              conic-gradient(from 0deg,
+                transparent 0deg,
+                rgba(255, 215, 0, 0.4) 60deg,
+                rgba(0, 255, 128, 0.3) 120deg,
+                rgba(0, 128, 255, 0.4) 180deg,
+                rgba(255, 107, 53, 0.3) 240deg,
+                rgba(255, 215, 0, 0.4) 300deg,
+                transparent 360deg
+              )
+            `,
+            animation: 'ledIridescence 3s linear infinite',
+            mixBlendMode: 'overlay',
+            filter: 'blur(2px) brightness(1.2)',
+          }}
+        />
+        
+        {/* Pulsing LED Ring - Desktop only */}
+        <div 
+          className="absolute inset-[-6px] pointer-events-none z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out md:block hidden"
           style={{
             borderRadius: `${size * 0.15 + 6}px`,
             background: `
@@ -129,9 +151,9 @@ export function Video3D({ position, rotation, size = 200, animationDelay = 0 }: 
           }}
         />
         
-        {/* Sparkle Effect */}
+        {/* Sparkle Effect - Reduced on mobile */}
         <div 
-          className="absolute inset-0 pointer-events-none z-35 opacity-0 group-hover:opacity-100 transition-opacity duration-800"
+          className="absolute inset-0 pointer-events-none z-35 opacity-0 group-hover:opacity-100 md:group-hover:opacity-100 group-hover:opacity-40 transition-opacity duration-800"
           style={{
             borderRadius: `${size * 0.15}px`,
             background: `
